@@ -50,15 +50,16 @@ val v29: String = "SpaceX"
 // val v30: Boolean = FALSE
 val v30: Boolean = false
 val v31: Double = 0.007
-// val v32: String = “🤯” должен был поместитья в String
+// val v32: String = “🤯” должен был поместитья в String, но кавычки не прямые
 val v33: Map<String,Any> = mapOf("true" to 2, "false" to 34)
-// Для Char должен быть один символ, в данном случае их много
+// Для Char должен быть один символ, в данном случае их много и кавычки не прямые
 //val v34 = ‘65535’
 val v35: Long = 72057594037927935L
 val v36: Float = 2.71828f
 val v37: Double = 101.0101
 val v38: String = "Quantum Computing"
 val v39: Map<Any,String> = mapOf(2 to "true", 34 to "false")
+//val v39: Map<Int,String> = mapOf(2 to "true", 34 to "false")
 val v40: Char = 'x'
 val v41: Int = 314
 val v42: Long = 123456789123456789L
@@ -78,7 +79,7 @@ val teaSpoons: Int = 0
 val planFoodDelivery: Int = 1000
 
 // 4.Хранить длину очереди в столовой до миллиардной доли сантиметра.
-val canteenQueueLengthCm: Float = 0.123456786f
+val canteenQueueLengthCm: Float = 0.12345678f
 
 // 5.Хранить факт, закрыт ли баг после того, как его просто переименовали в фичу.
 var isClosedAsFeatur: Boolean = true
@@ -93,7 +94,7 @@ var totalCatKeyPresses: Long = 10000000L
 var totalStarCountingAttempts: Long = 19919998L
 
 // 9.Хранить массу воздуха в спускающем матрасе после нападения кота в долях грамма.
-var currentAirMassGrams: Double = 176.007
+var currentAirMassGrams: Float = 176.007f
 
 // 10.Хранить словарь «название стартапа → сумму потерь инвесторов».
 var investorLossesByStartup: Map<String,Any> = mapOf("nameStartup1" to 1324, "nameStartup2" to 1324)
