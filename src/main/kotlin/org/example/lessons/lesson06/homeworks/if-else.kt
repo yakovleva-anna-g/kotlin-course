@@ -113,17 +113,20 @@ fun example5(extenion: String) {
 fun example6(value: Int, unit: Char) {
     if (unit == 'C') {
         val fahrenheit = value * 1.8 + 32
-        print("C")
-        print("F")
+        print(fahrenheit)
+        print(" F")
+        println()
     }
     else if (unit == 'F') {
         val celsius = (value - 32) * 1.8
-        print("F")
-        print("C")
+        print(celsius)
+        print(" C")
+        println()
     } else {
         println("Ошибка")
     }
 }
+
 
 //Задание 7: "Подбор одежды по погоде"
 
