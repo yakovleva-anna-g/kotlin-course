@@ -1,4 +1,5 @@
 package org.example.lessons.lesson06.homeworks
+
 fun main() {
     example1(month = 12)
     example2(dogAge = 3.0)
@@ -6,7 +7,7 @@ fun main() {
     example4(sumShoping = 2000)
     example5(extenion = "edfg")
     example6(100, 'C')
-    example7(temp=18)
+    example7(temp = 18)
     example8(ageCategory = 19)
 }
 
@@ -27,16 +28,15 @@ fun example1(month: Int) {
 //    if (month == 12 || month in 1..2) {
 //        println("Зима")
 //    }
-//    if (month in 3..5) {
+//   else if (month in 3..5) {
 //        println("Весна")
 //    }
-//    if (month in 6..8) {
+//   else if (month in 6..8) {
 //        println("лето")
-//    }
-//    if (month in 9..11) {
+//    } else if (month in 9..11) {
 //        println("Осень")
 ////    }
-//////    if (month == 12) {
+//////   else if (month == 12) {
 //////        println("Зима")
 //    }
 //    else {
@@ -52,11 +52,14 @@ fun example1(month: Int) {
 // Результат распечатай в консоль.
 
 fun example2(dogAge: Double) {
-val peopleYears = if (dogAge <= 2) {
-    dogAge * 10.5
-} else {21 + (dogAge - 2) * 4}
-println(peopleYears)
-}
+    val peopleYears = if (dogAge <= 2) {
+        dogAge * 10.5
+    } else {
+        21 + (dogAge - 2) * 4
+    }
+
+    println(peopleYears)
+} //проверить в начале на 0
 
 // Задание 3: "Определение способа перемещения"
 
@@ -64,15 +67,14 @@ println(peopleYears)
 // исходя из длины маршрута (distanceOfWay). Если маршрут до 1 км - "пешком", до 5 км - "велосипед", иначе - "автотранспорт".
 
 fun example3(distanceOfWay: Int) {
-if (distanceOfWay < 1000) {
-    println("пешком")
-}
-else if (distanceOfWay < 5000) {
-    println("велосипед")
-}
-    else {
-    println("автотранспорт")}
+    if (distanceOfWay < 1000) {
+        println("пешком")
+    } else if (distanceOfWay < 5000) {
+        println("велосипед")
+    } else {
+        println("автотранспорт")
     }
+}
 
 // Задание 4: "Расчет бонусных баллов"
 // Клиенты интернет-магазина получают бонусные баллы за покупки. Напишите функцию, которая принимает
@@ -81,9 +83,9 @@ else if (distanceOfWay < 5000) {
 
 fun example4(sumShoping: Int) {
     val bonusPoint = if (sumShoping <= 1000) {
-        (sumShoping/100)*2
+        (sumShoping / 100) * 2
     } else {
-        (sumShoping/100) * 3
+        (sumShoping / 100) * 3
     }
     println(bonusPoint)
 }
@@ -93,12 +95,12 @@ fun example4(sumShoping: Int) {
 // расширения файла печатает в консоль его тип: "Текстовый документ", "Изображение", "Таблица" или "Неизвестный тип".
 
 fun example5(extenion: String) {
-   when(extenion) {
-       "txt" -> println("Текстовый документ")
-       "jpg" -> println("Изображени")
-       "xlsx" -> println("Таблица")
-       else -> println("Неизвестный тип")
-   }
+    when (extenion) {
+        "txt", "doc", "pdf" -> println("Текстовый документ")
+        "jpg" -> println("Изображени")
+        "xlsx" -> println("Таблица")
+        else -> println("Неизвестный тип")
+    }
 }
 
 //Задание 6: "Конвертация температуры"
@@ -111,19 +113,22 @@ fun example5(extenion: String) {
 // строки print("C") или print("F").
 
 fun example6(value: Int, unit: Char) {
-    if (unit == 'C') {
-        val fahrenheit = value * 1.8 + 32
-        print(fahrenheit)
-        print(" F")
-        println()
-    }
-    else if (unit == 'F') {
-        val celsius = (value - 32) * 1.8
-        print(celsius)
-        print(" C")
-        println()
-    } else {
-        println("Ошибка")
+    when (unit) {
+        'C' -> {
+            val fahrenheit = value * 1.8 + 32
+            print(fahrenheit)
+            print(" F")
+            println()
+        }
+        'F' -> {
+            val celsius = (value - 32) * 1.8
+            print(celsius)
+            print(" C")
+            println()
+        }
+        else -> {
+            println("Ошибка")
+        }
     }
 }
 
@@ -135,12 +140,12 @@ fun example6(value: Int, unit: Char) {
 // выше +18 градусов. При температурах ниже -30 и выше +35 рекомендуйте не выходить из дома.
 
 fun example7(temp: Int) {
-when {
-    temp <= -30 || temp >= 35 -> println("рекомендуйте не выходить из дома")
-    temp <10 -> println("куртка и шапка")
-    temp <= 18 -> println("ветровка")
-    else -> println("футболка и шорты")
-}
+    when {
+        temp <= -30 || temp >= 35 -> println("рекомендуйте не выходить из дома")
+        temp < 10 -> println("куртка и шапка")
+        temp <= 18 -> println("ветровка")
+        else -> println("футболка и шорты")
+    }
 }
 
 //Задание 8: "Выбор фильма по возрасту"
@@ -150,9 +155,9 @@ when {
 // "18+" для остальных.
 
 fun example8(ageCategory: Int) {
-    when {
-        ageCategory in 0..9 -> println("детские")
-        ageCategory in 10..18 -> println("подросстковые")
+    when (ageCategory) {
+        in 0..9 -> println("детские")
+        in 10..<18 -> println("подросстковые")
         else -> println("Для тех кому 18+")
     }
 }
