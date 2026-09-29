@@ -19,7 +19,7 @@ fun main() {
     //example3("4539 1488 0343 6467")
     example4(email = "username@example.com")
     example5(path1 = "C:/Пользователи/Документы/report.txt", path2 = "D:/good.themes/dracula.theme")
-//    example6(phrase = "Котлин лучший язык программирования")
+//    example6(phrase1 = "Котлин лучший язык программирования")
 
 }
 fun example1(phrase: String) {
@@ -62,17 +62,19 @@ fun example1(phrase: String) {
     }
 // 3. Маскирование личных данных
 //Дана строка с номером кредитной карты, например "4539 1488 0343 6467".
-// Замаскируйте все цифры, кроме последних четырех, символами "*".
+// Замаскируйте все цифры, кроме последних четырех, символами "*". (здесь делим по пробелам)
 //fun example3(numberCart: String) {
-//
-//
+//val Cart = numberCart.replace(4539)
+////
 //}
 //4. Форматирование адреса электронной почты.
 //У вас есть электронный адрес, например "username@example.com". Преобразуйте его в строку "
 // username [at] example [dot] com", используя функцию replace()
-
+// здесь можно через split("/") и выводим n - 1 или .last()
 fun example4(email: String) {
-    val formatted = email.replace("@", "[at]").replace(".", "[dot]")
+    val formatted = email
+        .replace("@", "[at]")
+        .replace(".", "[dot]")
     println(formatted)
 }
 
@@ -91,9 +93,9 @@ val fileName1 = path1.substringAfterLast('/')
 // У вас есть фраза, например "Котлин лучший язык программирования" (может быть любой с разделителями слов - пробел).
 // Создайте аббревиатуру из начальных букв слов (например, "ООП").
 //Используйте split. Используйте for для перебора слов. Используйте var переменную для накопления первых букв.
-//fun example6(phrase: String) {
-//val words = phrase.split(" ")
+//fun example6(phrase1: String) {
+//val words = phrase1.split(" ")
 //    var abbreviation = ""
 //    for
-
+// println(abb.uppercase())
 //}
