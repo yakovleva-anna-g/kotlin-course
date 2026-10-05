@@ -1,5 +1,7 @@
 package org.example.lessons.lesson09.homeworks
 
+import org.example.lessons.lesson09.emptySet
+import org.example.lessons.lesson09.mutableList
 import javax.lang.model.type.ArrayType
 fun main() {
 
@@ -168,6 +170,51 @@ fun main() {
         if (element11 % 2 == 0) {
             newEx11List.add(element11)
         }
-println(newEx11List)
+        println(newEx11List)
     }
+//    Работа с Множествами Set
+// 1.Создайте пустое неизменяемое множество целых чисел.
+val ex1Set: Set<Int> = emptySet()
+
+// 2.Создайте неизменяемое множество целых чисел, содержащее три различных элемента (например, 1, 2, 3).
+val ex2Set: Set<Int> = setOf(1, 2, 3)
+
+// 3.Создайте изменяемое множество строк и инициализируйте его несколькими значениями
+// (например, "Kotlin", "Java", "Scala").
+val ex3Set: MutableSet<String> = mutableSetOf("Kotlin", "Java", "Scala")
+
+// 4.Имея изменяемое множество строк, добавьте в него новые элементы (например, "Swift", "Go").
+    ex3Set.add("Swift")
+    ex3Set.add("Go")
+
+// 5.Имея изменяемое множество целых чисел, удалите из него определенный элемент (например, 2).
+val ex5Set: MutableSet<Int> = mutableSetOf(1, 3, 4, 2)
+ex5Set.remove(2)
+
+// 6.Создайте множество целых чисел и используйте цикл для вывода каждого элемента на экран.
+val ex6Set: Set<Int> = setOf(6, 7, 8, 9)
+    for (element6Set in ex6Set)
+        println(element6Set)
+    println("=====Set=6========")
+// 7.Создай функцию, которая принимает множество строк (set) и строку и проверяет, есть ли
+// в множестве указанная строка. Нужно распечатать булево значение true если строка есть.
+// Реши задачу через цикл.
+val ex7Set: Set<String> = setOf("возможно", "да", "нет")
+    for (element7Set in ex7Set) {
+        if (element7Set == "да") {
+            println(true)
+            break
+        }
+
+    }
+
+// 8.Создайте неизменяемое множество строк и конвертируйте его в изменяемый список строк с
+// использованием цикла.
+val ex8Set: Set<String> = setOf("яблоко", "груша", "слива")
+    val mutabEx8List: MutableList<String> = mutableListOf()
+    for (elemetEx8Set in ex8Set) {
+        mutabEx8List.add(elemetEx8Set)
+    }
+    println(mutabEx8List)
+
 }
