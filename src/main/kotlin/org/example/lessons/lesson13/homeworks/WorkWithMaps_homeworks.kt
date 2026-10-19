@@ -22,7 +22,7 @@ fun main() {
 
 // 3.В изменяемый словарь с данными о прохождении тестов добавьте новый тест и его результат.
     val mutableTest = mutableMapOf(1 to "ghgh", 2 to "regffg")
-    val ex3 = mutableTest + (3 to "fjjbg")
+    val ex3 = mutableTest.put(3, "fjjbg")
     println(ex3)
 
 println("=======3=====")
@@ -85,31 +85,114 @@ println(copiVersions)
 
 // 11.Используя словарь с настройками тестирования для различных мобильных устройств (ключ — модель устройства,
 // значение - строка с настройками), получите настройки для конкретной модели или верните настройки по умолчанию.
+val mobilForTest = mapOf("iPhone 14" to "Экран 6.1 дюйма, iOS 16, Safari", "Samsung Galaxy S23" to "Экран 6.5 дюйма, Android 13, Chrome")
+println(mobilForTest.getOrElse(key = "iPhone 15"){"настройки по умолчанию"})
+
+//    get(key) — базовый доступ
+//    fun <K, V> Map<K, V>.get(key: K): V?
+//    возвращает значение по ключу;
+//    если ключа нет — возвращает null;
+//    тип — V? — nullable.
+//
+//    val map = mapOf("a" to 1, "b" to 2)
+//    map.get("a")    // 1
+//    map.get("z")    // null
+//    getValue(key) — строгий доступ
+//
+//    kotlin
+//    fun <K, V> Map<K, V>.getValue(key: K): V
+//    возвращает значение;
+//    если ключа нет — бросает NoSuchElementException;
+//    тип — V — не-nullable.
+
+//    getOrDefault(key, defaultValue) — с fallback
+//
+//    kotlin
+//    fun <K, V> Map<K, V>.getOrDefault(key: K, defaultValue: V): V
+//    возвращает значение по ключу;
+//    если ключа нет — возвращает defaultValue;
+//    тип — V — не-nullable.
+//    Пример:
+//
+//    kotlin
+//    map.getOrDefault("a", 0)    // 1
+//    map.getOrDefault("z", 0)    // 0
+//    Когда: дефолт постоянный и простой — например, 0, "", "unknown".
+//
+//    🎯 getOrElse(key) { ... } — с лямбдой
+//
+//    kotlin
+//    fun <K, V> Map<K, V>.getOrElse(
+//        key: K,
+//        defaultValue: () -> V
+//    ): V
+//    возвращает значение по ключу;
+//    если ключа нет — вызывает лямбду и возвращает её результат;
+//    тип — V — не-nullable.
 
 // 12.Проверьте, содержит ли словарь с ошибками тестирования (ключ - код ошибки, значение - описание ошибки)
 // определенный код ошибки.
+val errors = mapOf(404 to "Resource not found", 500 to "Internal server error")
+    println(errors.containsKey(404)) // true или false
 
 // 13.Дан неизменяемый словарь, где ключи — это идентификаторы тестовых сценариев в формате "TestID_Version",
 // а значения — статусы выполнения этих тестов ("Passed", "Failed", "Skipped").
 // Отфильтруйте словарь, оставив только те сценарии, идентификаторы которых соответствуют определённой
 // версии тестов, то-есть в ключе содержится требуемая версия.
+    // length - количество символо (возвращае Int)
+    // startsWith - начинается с (возвращает Boolean (true/false)
+    // endsWith — заканчивается на (возвращает Boolean (true/false)
+    // substring — вырезать часть строки
+
+
+    val testVersions = mapOf("Test1_v1.0" to "Passed", "Test2_v1.0" to "Failed", "Test3_ve2.0" to "Skipped","Test4_v2.0" to "Failed" )
+    println(testVersions.filterKeys { it.endsWith("v1.0") })
 
 // 14.У вас есть словарь, где ключи — это названия функциональных модулей приложения,
 // а значения — результаты их тестирования. Проверьте, есть ли модули с неудачным тестированием.
 
+val moduleTests = mapOf("Profile" to "Passed", "Search" to "Failed", "Payment" to "Skipped")
+    println(moduleTests.containsValue("Failed")) // true или false
+
 // 15.Добавьте в изменяемый словарь с настройками тестовой среды настройки из другого словаря.
+
+    val testEnv = mutableMapOf("параметр1" to "значение1", "параметр2" to "значение2", "параметр3" to "значение3",)
+    val extraSettings = mapOf("параметр4" to "значение4", "параметр5" to "значение5")
+    testEnv.putAll(extraSettings)
+    println(testEnv)
+
 
 // 16.Объедините два неизменяемых словаря с данными о багах.
 
+     val bag1 = mapOf("ID1" to "название бага 1", "ID2" to "название бага 2", "ID3" to "название бага 3")
+    val bag2 = mapOf("ID4" to "название бага 4", "ID5" to "название бага 5")
+   println( bag1+bag2)
+
 // 17.Очистите изменяемый словарь с временными данными о последнем прогоне автоматизированных тестов.
+val ex17 = mutableMapOf("runId" to "RUN-2026-10-19-001", "startTime" to "2026-10-19T10:15:00", "browser" to "chrome")
+   ex17.clear()
+    println(ex17)
 
 // 18.Исключите из отчета по автоматизированному тестированию те случаи, где тесты были пропущены
 // (имеют статус “skipped”). Ключи - название теста, значения - статус.
 
+    val ex18 = mutableMapOf("тест1" to "skipped", "тест2" to "Passed", "тест3" to "Failed","тест4" to "skipped")
+val filtered = (ex18 - "тест1") - "тест4"
+println(filtered)
+
 // 19.Создайте копию словаря с конфигурациями тестирования удалив из него несколько конфигураций.
+
+val ex19 = mutableMapOf("browserType" to "chrome", "log" to "INFO")
+    val config = listOf("log")
+    val copy = ex19-config
+println(ex19)
+    println(copy)
 
 // 20.Создайте отчет о тестировании, преобразовав словарь с результатами тестирования
 // (ключ — идентификатор теста, значение — результат) в список строк формата "Test ID: результат".
+
+    val testResults = mapOf("Test 1" to "Passed", "Test 2" to  "Failed",  "Test 3" to "Skipped", "Test 4" to "Passed")
+    val report = testResults.map { "${it.key}: ${it.value}" }
 
 // 21.Преобразуйте изменяемый словарь с результатами последнего тестирования в неизменяемый для архивации.
 
