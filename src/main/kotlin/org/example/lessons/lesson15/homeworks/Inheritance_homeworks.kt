@@ -147,3 +147,101 @@ class Cupboard(
 ) : StorageFurniture (name, material, weightKg, heightCm, widthCm, depthCm) {
     fun getType(): String = "Шкаф"
 }
+
+//Это класс контейнера. Он абстрактный, это означает, что нельзя создавать экземлпяр этого
+// класса, он нужен только для того, чтобы быть основой для подклассов.
+//
+//Создай подклассы этого контейнера, которые будут добавлять строку material
+// (или коллекции или словари строк) в какое-то определённое место (места).
+//
+//Первый класс должен вставлять строку на дно контейнера (должно появиться
+// под индексом 0)
+
+abstract class Materials {
+    private val materials = mutableListOf<String>() // изменяемый список стартует пустой
+    // private - инкапсуляция (скрытое хранилище)
+    fun addMaterial(material: String) { // функция-метод добавляет строку в конец списка
+        materials.add(material) // роль метода - строительный блок: наследники вызывают его,
+    // чтобы собрать нужное поведение
+    }
+    fun extractMaterials(): List<String> {
+        val extracted = materials.toList() // toList() - создает новый список - копию текущего
+        // новая переменная val extracted - отдельный список
+        materials.clear() // очищает внутренний список - контейнер пустеет
+        return extracted
+    }
+    fun printContainer() {
+        materials.forEachIndexed { index, layer -> // forEachIndexed - проходит по списку дает и индекс и значение
+           // layer - элемент на этой позиции (название переменной на мой выбор)
+            println("[$index]: $layer")
+        }
+    }
+}
+class InsertFirstMaterial : Materials() { // класс без переменных наследник  Materials()
+
+    fun insert(item: String // метод принимает строку
+    ) {
+        val materials = extractMaterials() // сохранить содержимое и очистить контейнер
+        addMaterial(item) // добавить новый элемент
+        materials.forEach { // вернуть старые — циклом по сохранённому списку (forEach + addMaterial)
+           // forEach - сохраняет исходный порядок
+            addMaterial(it)
+        }
+    }
+}
+
+
+// Второй класс должен получать список строк и вставлять их в начало контейнера
+// но поочерёдно с теми данными, которые уже есть. То-есть, наш список должен появиться
+// в контейнере по индексам 0, 2, 4 и так далее.
+// нужно вызывать addMaterial в такой последовательности:
+// items[0], materials[0], items[1], materials[1], items[2], materials[2],
+
+class InsertOneByOneMaterials : Materials() {
+
+    fun insert(items: List<String>) { // метод принимает список строк
+        val materials = extractMaterials() // забирает старое содержимое и контейнер пуст становится
+        val maxIndex = max(items.lastIndex, materials.lastIndex) // определяет длину цикла - максимум из двух lastIndex
+        for (i in 0..maxIndex) { // перебор в цикле от 0 до maxIndex включительно
+            if (i < items.size) { // условие проверяет существует ли элемент items[i]
+                // если индекс меньше размера — существует, можно добавлять.
+                // Иначе — список закончился, обращаться нельзя.
+                addMaterial(items[i]) // добавляет новый элемент
+            }
+            if (i < materials.size) { // добавляет старый элемент
+                addMaterial(materials[i])
+            }
+        }
+    }
+}
+
+//Третий класс при добавлении строки должен отсортировать весь список материалов в
+// алфавитном порядке включая добавляемый материал.
+
+class InsertSortedMaterials : Materials() {
+
+    fun insert(item: String) { // метод принимает строку
+        val materials = (extractMaterials() + item).sorted()
+        // extractMaterials() - очистить
+        // затем + item) добавить новый к списку
+        // затем .sorted() создает еще один - отсортированный целиком
+        materials.forEach { // вернуть в нужном порядке
+            addMaterial(it)
+        }
+    }
+}
+
+//Четвёртый класс должен принимать словарь (ключи и значения строки).
+// Каждая пара ключа и значения должна попадать в контейнер следующим образом -
+// ключ в начало, значение в конец. Таким образом в начале должны быть ключи в
+// обратном порядке, потом существующие материалы, потом все значения.
+
+class InsertMapMaterials : Materials() {
+
+    fun insert(items: Map<String, String>) {
+        val materials = items.keys.reversed() + extractMaterials() + items.values
+        materials.forEach {
+            addMaterial(it)
+        }
+    }
+}
