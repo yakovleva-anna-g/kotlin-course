@@ -18,22 +18,25 @@ object Colors {
         const val YELLOW = "\u001B[33m"
 }
 
-open class Animal(name: String ){
-    fun makeSound() {
+abstract class Animal(){ // класс Animal описывает какой-то
+    // класс заготовки для будущих животных
+    open fun makeSound() { // обязательно метод должен быть open иначе
+        // override в классы Dog и тд не скомпилируется
         println("This animal makes no sound.")
     }
 }
-class Dog: Animal(name = "Dog"){
+class Dog: Animal(){
+    val dog = Dog()
     override fun makeSound(){
         println("${Colors.RED}Bark${Colors.RESET}")
     }
 }
-    class Cat: Animal(name="Cat"){
+    class Cat: Animal(){
         override fun makeSound(){
             println("${Colors.GREEN}Meow${Colors.RESET}")
         }
     }
-    class Bird: Animal(name = "Bird"){
+    class Bird: Animal(){
         override fun makeSound(){
             println("${Colors.YELLOW}Tweet${Colors.RESET}")
         }
@@ -125,8 +128,8 @@ println("${ColorsPrinter.TEXT_BLACK}${ColorsPrinter.BG_WHITE}$item $ColorsPrinte
     }
 }
 
-class InkjetPrinter(): Printer() {
-    val schemes = listOf<Pair<String, String>> (
+class InkjetPrinter: Printer() {
+    val schemes = listOf<Pair<String, String>>(
         ColorsPrinter.TEXT_RED to ColorsPrinter.BG_WHITE,    // красный на белом
         ColorsPrinter.TEXT_GREEN  to ColorsPrinter.BG_BLACK,    // зелёный на чёрном
         ColorsPrinter.TEXT_YELLOW to ColorsPrinter.BG_BLUE,     // жёлтый на синем
@@ -139,13 +142,14 @@ class InkjetPrinter(): Printer() {
         val words = text.split(" ")
             var i = 0
             var colorIndex = 0
-            while (i++<words.size) {
+                    do {println("$bgColor$textColor${words[i]}$ColorsPrinter.RESET")
+                    } while (++i<words.size)
                 val (textColor, bgColor) = schemes[colorIndex]
-                println("$bgColor$textColor${words[i]}$ColorsPrinter.RESET")
-                if (colorIndex++>= schemes.size)
+
+                if (++colorIndex>= schemes.size) {colorIndex = 0}
         }
     }
-}
+
 //Перегрузка методов
 //
 //Класс “Корзина товаров”: содержит поле словаря из ID товаров и их количества.
@@ -155,5 +159,30 @@ class InkjetPrinter(): Printer() {
 //Принимает словарь из id и количества и добавляет всё в корзину
 //Принимает список из id (добавляет по одной единице).
 //Учесть, что если товар уже есть в корзине, нужно увеличить его количество, если нет - добавить.
-//Попробуй создать корзину и положить в неё товар разными способами, потом распечатать корзину в консоль.
-//Переопредели у корзины метод toString для красивого форматирования содержимого таблицы, включая итоговое количество артикулов и общее количество всего товара в корзине.
+//Попробуй создать корзину и положить в неё товар разными способами, потом распечатать корзину
+// в консоль.
+//Переопредели у корзины метод toString для красивого форматирования содержимого таблицы,
+// включая итоговое количество артикулов и общее количество всего товара в корзине.
+
+class BasketGoods() {
+    val field = mutableMapOf<Int,Int>()
+    fun addToCart(itemId: Int) {val amount = field[itemId]
+    if (amount == null) {
+        field[itemId] = 1
+    } else {
+        field[itemId] = amount+1
+    }
+    }
+
+    fun addToCart(itemId: Int, amount: Int) {
+        for (i in 1..amount) {
+            addToCart(itemId)
+        }
+    }
+
+    fun addToCart(field: Map<Int, Int>) {
+        for (product in field) {
+            addToCart(product.key, product.value)
+        }
+    }
+}
