@@ -60,7 +60,7 @@ fun withdrawCash(pin: String): Double {return 0.0}
 private fun openSafe(amount: Double) {}
 }
 
-// 2.Почемучка
+// 2.Почемучка НЕ доделано еще
 //Нужно скопировать код к себе и постараться ответить на все “почему” в
 // комментариях и заданным образом доработать класс ChildrenClass (BaseClass доработке не подлежит)
 
