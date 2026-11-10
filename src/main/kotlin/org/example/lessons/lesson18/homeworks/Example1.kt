@@ -1,82 +1,85 @@
 package org.example.lessons.lesson18.homeworks
 
-interface Powerable {
+import java.io.InputStream
+
+
+interface Powerable { // мощность включается/выключается
     fun powerOn()
     fun powerOff()
 }
 
-interface Openable {
+interface Openable { // открывается
     fun open()
     fun close()
 }
 
-interface WaterContainer {
-    val capacity: Int
-    fun fillWater(amount: Int)
-    fun getWater(amount: Int)
+interface WaterContainer { // контейнер для воды
+    val capacity: Int // вместимость
+    fun fillWater(amount: Int) // наполненный водой
+    fun getWater(amount: Int) // берет воду
 }
 
-interface TemperatureRegulatable {
+interface TemperatureRegulatable { // регулировать температуру
     val maxTemperature: Int
-    fun setTemperature(temp: Int)
+    fun setTemperature(temp: Int) // уставленная температура
 }
 
-interface WaterConnection {
-    fun connectToWaterSupply()
-    fun getWater(amount: Int)
+interface WaterConnection { // подключение воды
+    fun connectToWaterSupply() // подключение к водопроводу
+    fun getWater(amount: Int) // берет воды
 }
 
-interface AutomaticShutdown {
-    val sensorType: String
-    val maxSensoredValue: Int
-    fun startMonitoring()
+interface AutomaticShutdown { // автоматическое отключение
+    val sensorType: String // тип датчика
+    val maxSensoredValue: Int // максимальное значение
+    fun startMonitoring() // начать мониторинг
 }
 
-interface Drainable {
-    fun connectToDrain()
-    fun drain()
+interface Drainable { // сливной
+    fun connectToDrain() //подключен слив
+    fun drain() // слив
 }
 
-interface Timable {
-    fun setTimer(time: Int)
+interface Timable { //время
+    fun setTimer(time: Int) // установленное время
 }
 
-interface BatteryOperated {
-    fun getCapacity(): Double
-    fun replaceBattery()
+interface BatteryOperated { // работает от батареи
+    fun getCapacity(): Double // вмещает (емкость)
+    fun replaceBattery() // берет батарею
 }
 
-interface Mechanical {
-    fun performMechanicalAction()
+interface Mechanical { // механический
+    fun performMechanicalAction() // выполняет механические действия
 }
 
-interface LightEmitting {
-    fun emitLight()
-    fun completeLiteEmission()
+interface LightEmitting { // светоизлучающий
+    fun emitLight() // излучает свет
+    fun completeLiteEmission() // полное излучение
 }
 
-interface SoundEmitting {
-    fun setVolume(volume: Int)
-    fun mute()
-    fun playSound(stream: InputStream)
+interface SoundEmitting { //звукоизлучающий
+    fun setVolume(volume: Int) // уставлен объем
+    fun mute() // без звука (немой)
+    fun playSound(stream: InputStream) //проигрывается музыка
 }
 
-interface Programmable {
-    fun programAction(action: String)
-    fun execute()
+interface Programmable { // программируемый
+    fun programAction(action: String) // программа активирована
+    fun execute() // выполнить
 }
 
-interface Movable {
-    fun move(direction: String, distance: Int)
+interface Movable { // подвижный
+    fun move(direction: String, distance: Int) // перемещается
 }
 
-interface Cleanable {
+interface Cleanable { // стирается
     fun clean()
 }
 
-interface Rechargeable {
-    fun getChargeLevel(): Double
-    fun recharge()
+interface Rechargeable { // перезаряжаемый
+    fun getChargeLevel(): Double // получен уровень зарядки
+    fun recharge() // перезаряжать
 }
 
 // 1. Холодильник
@@ -85,8 +88,10 @@ abstract class Refrigerator:
 
 // 2. Стиральная машина
 abstract class WashingMachine :
-    Powerable, Openable, WaterContainer, TemperatureRegulatable,
-    WaterConnection, Drainable, Timable, SoundEmitting, Programmable
+    Powerable, Openable, WaterContainer, // контейнер для воды
+    TemperatureRegulatable,
+    WaterConnection, // подключение к воде
+    Drainable, Timable, SoundEmitting, Programmable
 
 // 3. Умная лампа
 abstract class SmartLamp :
@@ -94,12 +99,13 @@ abstract class SmartLamp :
 
 // 4. Электронные часы
 abstract class ElectronicClock :
-    Powerable, Timable, SoundEmitting, Programmable, LightEmitting
+    Powerable, Timable, SoundEmitting, Programmable, LightEmitting // излучение света
 
 // 5. Робот-пылесос
 abstract class RobotVacuumCleaner :
-    Powerable, Movable, Rechargeable, SoundEmitting,
-    Programmable, Cleanable, Timable, AutomaticShutdown
+    Powerable, Movable, Rechargeable, // перезаряжаемый
+    SoundEmitting,
+    Programmable, Cleanable, Timable, AutomaticShutdown // автоматическое отключение
 
 // 6. Механические часы
 abstract class MechanicalClock :
@@ -111,7 +117,8 @@ abstract class Flashlight :
 
 // 8. Кофемашина
 abstract class CoffeeMachine :
-    Powerable, WaterContainer, WaterConnection, TemperatureRegulatable,
+    Powerable, WaterContainer, WaterConnection, // подключение к воде
+    TemperatureRegulatable,
     Drainable, Timable, SoundEmitting, Programmable
 
 // 9. Умная колонка
