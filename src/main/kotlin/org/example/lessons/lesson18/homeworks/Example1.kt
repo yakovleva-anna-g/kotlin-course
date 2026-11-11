@@ -3,7 +3,7 @@ package org.example.lessons.lesson18.homeworks
 import java.io.InputStream
 
 
-interface Powerable { // мощность включается/выключается
+interface Powerable1 { // мощность включается/выключается
     fun powerOn()
     fun powerOff()
 }
@@ -64,7 +64,7 @@ interface SoundEmitting { //звукоизлучающий
     fun playSound(stream: InputStream) //проигрывается музыка
 }
 
-interface Programmable { // программируемый
+interface Programmable1 { // программируемый
     fun programAction(action: String) // программа активирована
     fun execute() // выполнить
 }
